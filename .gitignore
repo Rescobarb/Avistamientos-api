@@ -1,0 +1,31 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+ 
+# Base de datos H2 (se crea sola al arrancar la API)
+data/
+*.mv.db
+*.trace.db
+ 
+# IDEs
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+nbproject/
+.vscode/
+ 
+# Sistema operativo
+.DS_Store
+Thumbs.db
+ 
+# Logs
+*.log
