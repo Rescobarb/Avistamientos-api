@@ -18,8 +18,8 @@ API REST en Java (Spring Boot + H2) para gestionar un registro de avistamientos 
 ## Instalación y ejecución
 
 ```bash
-git clone <URL-DE-ESTE-REPOSITORIO>
-cd <carpeta-del-repositorio>
+git clone https://github.com/Rescobarb/avistamientos-api.git
+cd avistamientos-api
 ```
 
 Ejecuta la API desde la carpeta que contiene el `pom.xml`:
