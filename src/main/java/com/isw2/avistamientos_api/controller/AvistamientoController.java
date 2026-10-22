@@ -1,4 +1,4 @@
-package com.isw2.avistamientos_api.controller;
+package com.isw2.avistamientos_api.Controller;
 
 import java.net.URI;
 import java.util.List;
@@ -16,19 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.isw2.avistamientos_api.model.AvistamientoModelo;
-import com.isw2.avistamientos_api.repository.AvistamientoRepository;
+import com.isw2.avistamientos_api.Model.AvistamientoModelo;
+import com.isw2.avistamientos_api.Repository.AvistamientoRepository;
 
-import jakarta.validation.Valid;
+import com.isw2.avistamientos_api.Validacion.ValidadorDeAvistamiento;
 
 @RestController
 @RequestMapping("/avistamientos")
 public class AvistamientoController {
 
     private final AvistamientoRepository aRepo;
+    private final ValidadorDeAvistamiento validador;
 
-    public AvistamientoController(AvistamientoRepository aRepo) {
+    public AvistamientoController(AvistamientoRepository aRepo, ValidadorDeAvistamiento validador) {
         this.aRepo = aRepo;
+        this.validador = validador;
     }
 
     @GetMapping
@@ -50,17 +52,18 @@ public class AvistamientoController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<AvistamientoModelo> crear(@Valid @RequestBody AvistamientoModelo nuevo) {
+    public ResponseEntity<AvistamientoModelo> crear(@RequestBody AvistamientoModelo nuevo) {
+        validador.validar(nuevo);
         nuevo.setId(null);
         AvistamientoModelo guardado = aRepo.save(nuevo);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(guardado.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/avistamientos/{id}").buildAndExpand(guardado.getId()).toUri();
         return ResponseEntity.created(location).body(guardado);
     }
 
     @PutMapping("/actualizar{id}")
-    public ResponseEntity<AvistamientoModelo> actualizar(@PathVariable Long id,
-            @Valid @RequestBody AvistamientoModelo datos) {
+    public ResponseEntity<AvistamientoModelo> actualizar(@PathVariable Long id, @RequestBody AvistamientoModelo datos) {
+        validador.validar(datos);
         return aRepo.findById(id).map(existente -> {
             existente.setEspecie(datos.getEspecie());
             existente.setUbicacion(datos.getUbicacion());

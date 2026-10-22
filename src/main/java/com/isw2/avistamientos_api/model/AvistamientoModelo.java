@@ -1,4 +1,4 @@
-package com.isw2.avistamientos_api.model;
+package com.isw2.avistamientos_api.Model;
 
 import java.time.LocalDate;
 
@@ -10,8 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "avistamientos")
@@ -20,19 +18,15 @@ public class AvistamientoModelo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotBlank(message = "La especie es obligatoria")
+	
 	private String especie;
 
-	@NotBlank(message = "El lugar es obligatorio")
 	@JsonProperty("lugar")
 	@Column(name = "ubicacion")
 	private String ubicacion;
 
-	@NotNull(message = "La fecha es obligatoria y debe tener formato AAAA-MM-DD")
 	private LocalDate fecha;
 
-	@NotBlank(message = "El observador es obligatorio")
 	private String observador;
 
 	public AvistamientoModelo() {
