@@ -107,10 +107,6 @@ mvnw.cmd clean verify        # Windows
 
 Se usa JaCoCo. El reporte HTML queda en `target/site/jacoco/index.html`.
 
-### Justificación de las decisiones de prueba
-
-El documento con la justificación (tabla de casos, niveles de prueba, dobles, lo que no se probó y lectura de la cobertura) está en la carpeta [`docs/`](docs/).
-
 ## Documentación interactiva (Swagger)
 
 Con la API corriendo, puedes probar todos los endpoints desde el navegador:
